@@ -19,7 +19,7 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
-        
+        <!--Springcore-->
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -27,12 +27,40 @@
             <version>6.2.3</version>
         </dependency>
 
-            <!-- Nay là JSTL-->
-<dependency>
-    <groupId>jakarta.servlet.jsp.jstl</groupId>
-    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-    <version>3.0.2</version>
-</dependency>
+        <!-- Nay là JSTL-->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!--Hibernate core-->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.6.7.Final</version>
+        </dependency>
+        <!--Lombook , MYSQL-CONNECTER-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+        <!-- Để tự động tạo getter , setter , toString , hashCode .... bằng annostate là kiểu @Getter á  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--SpringORM-->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>6.2.3</version>
+        </dependency>
+        
 
 
     </dependencies>

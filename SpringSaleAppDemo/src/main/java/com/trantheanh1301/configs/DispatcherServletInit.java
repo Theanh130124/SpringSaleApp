@@ -10,24 +10,28 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  *
  * @author LAPTOP
  */
-public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    // 
+    // Cấu hình những thằng dùng chung  -> giúp tầng web truy cập mà k cần hỏi Dispacherserlvet
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{
+            HibernateConfig.class // Khai báo hibernate ở đây
+        };
     }
-    //Khai báo gỗ đậu ở trong này
+
+    //Khai báo gỗ đậu ở trong này -> Cấu hình những thằng dùng riêng
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {
+        return new Class[]{
             WebAppContextConfigs.class
-        } ;
+        };
     }
+
     //Kí hiệu đường dẫn trên web -> thường thì dùng dấu / 
     @Override
     protected String[] getServletMappings() {
-        return new String[] {"/"}; 
+        return new String[]{"/"};
     }
-    
+
 }
