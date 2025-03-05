@@ -15,7 +15,7 @@
         <title>Trang chủ</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>SPRING MVC</h1>
 
         <ul>
             <c:forEach items="${products}" var="p">

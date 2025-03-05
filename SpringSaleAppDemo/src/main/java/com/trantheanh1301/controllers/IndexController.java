@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @Autowired // phải có này để Spring quản lý
-    private SessionFactory sessionFactory;
+    private LocalSessionFactoryBean factory;
 
     //Muốn gửi dữ liệu đi thì phải có model
 //    @RequestMapping("/")
@@ -35,7 +35,7 @@ public class IndexController {
     @RequestMapping("/")
     @Transactional
     public String index(Model model) {
-        Session s = sessionFactory.getCurrentSession();
+        Session s = factory.getObject().getCurrentSession();
         Query q = s.createQuery("FROM Product");
         model.addAttribute("products", q.getResultList());
         return "index";
