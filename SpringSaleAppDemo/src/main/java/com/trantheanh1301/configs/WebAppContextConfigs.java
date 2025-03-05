@@ -22,7 +22,8 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc // không cần ghi đè hết WebMvcConfigurer 
 @EnableTransactionManagement // bật giao tác ở đây
 @ComponentScan(basePackages = {
-    "com.trantheanh1301.controllers"
+    "com.trantheanh1301.controllers",
+        "com.trantheanh1301.configs"
 
 })  //Chỉ định nơi tạo hạt đậu -> cứ dùng annotation liên quan mvc thì đều khai báo vào đây
 public class WebAppContextConfigs implements WebMvcConfigurer {

@@ -32,12 +32,11 @@ public class HibernateConfig {
     //Tạo một properties file -> tên là database properties trong resource bên file
 
     @Bean
-
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean sessionFactory
                 = new LocalSessionFactoryBean();
         sessionFactory.setPackagesToScan(new String[]{
-            "com.dht.pojo" //có sửa chổ này thành pojo
+            "com.trantheanh1301.pojo" //có sửa chổ này thành pojo
         });
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setHibernateProperties(hibernateProperties());

@@ -4,8 +4,10 @@
  */
 package com.trantheanh1301.controllers;
 
-import jakarta.persistence.Query;
+import org.hibernate.query.Query; // Lưu ý import này
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
-    private LocalSessionFactoryBean factory ; 
-    
-    
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
     //Muốn gửi dữ liệu đi thì phải có model
 //    @RequestMapping("/")
 //    public String index(Model model){
@@ -31,11 +34,11 @@ public class IndexController {
 //    }
     @RequestMapping("/")
     @Transactional
-    public String index(Model model){
-        Session s = factory.getObject().getCurrentSession();
+    public String index(Model model) {
+        Session s = sessionFactory.getCurrentSession();
         Query q = s.createQuery("FROM Product");
-        model.addAttribute("products",q.getResultList());
+        model.addAttribute("products", q.getResultList());
         return "index";
     }
-    
+
 }
