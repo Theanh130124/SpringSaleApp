@@ -28,3 +28,9 @@ DemoSpringMVC
 
                 } 
             }
+
+            //JOIN NEW
+//            Join<OrderDetail,Product> join = rO.join("productId",JoinType.RIGHT);
+//            Join<OrderDetail,SaleOrder> join_2 = rO.join("orderId",JoinType.INNER);
+//            predicates.add(join);
+//            predicates.add(join_2)
