@@ -18,3 +18,13 @@ DemoSpringMVC
         }
 
     }
+
+
+                if(params!=null){
+               String namePro = params.get("namePro");
+                if (namePro != null && !namePro.isEmpty()) {
+
+                    predicates.add(builder.like(rP.get("name").as(String.class), String.format("%%%s%%", namePro)));
+
+                } 
+            }
