@@ -87,12 +87,15 @@ public class ProductRepositoryImpl implements ProductRepository{
         }
 
     @Override
-    public void addOrUpdate(Product p) {
-            Session s = factory.getObject().getCurrentSession();
-            if (p.getId() != null)
-                s.update(s);
-            else
-                s.save(s);
+    public Product addOrUpdate(Product p) {
+              Session s = factory.getObject().getCurrentSession();
+             if (p.getId() == null)
+                 s.persist(s);
+             else
+                 s.merge(p);
+         
+         
+         return p;
         
     }
 

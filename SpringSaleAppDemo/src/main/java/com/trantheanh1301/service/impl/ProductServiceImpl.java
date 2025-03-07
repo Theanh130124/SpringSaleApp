@@ -27,8 +27,8 @@ public class ProductServiceImpl implements ProductRepository{
     }
 
     @Override
-    public void addOrUpdate(Product p) {
-         this.proRepo.addOrUpdate(p);
+    public Product addOrUpdate(Product p) {
+         return this.proRepo.addOrUpdate(p);
     }
 
     @Override

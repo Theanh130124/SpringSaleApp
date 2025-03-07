@@ -10,6 +10,6 @@ import java.util.Map;
 
 public interface ProductRepository {
     public List<Product> getProducts(Map<String, String> params);
-    public void addOrUpdate(Product p);
+    public Product addOrUpdate(Product p);
     public Product getProductById(int id);
 }
