@@ -33,17 +33,4 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         configurer.enable();// giúp xử lý các yêu cầu tài nguyên tĩnh (như CSS, JavaScript, hình ảnh) mà không bị Spring MVC chặn.
     }
 
-    @Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver r = new InternalResourceViewResolver();
-
-//Chỉ temples ezym
-        r.setViewClass(JstlView.class);
-
-        r.setPrefix("/WEB-INF/pages/"); // tiền tố
-        r.setSuffix(".jsp"); // hậu tố
-        return r;
-
-        //Ví dụ Controller trả "home" -> ảnh xạ thành /WEB-INF/pages/home.jsp trình duyệt hiẹn home.jsp.
-    }
 }
