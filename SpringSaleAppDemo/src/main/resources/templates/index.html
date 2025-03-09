@@ -21,11 +21,16 @@
                             <a class="nav-link"  th:text="'Trang chủ'"></a>
                         </li>
                         <li th:each="cate: ${categories}"  class="nav-item">
-                            <a class="nav-link"  th:text="${cate.name}"></a>
+                            <a class="nav-link"  th:text="${cate.name}" th:href="@{/(cateId=${cate.id})}"  ></a>
                         </li>
 
                     </ul>
                 </div>
+
+                <form class="d-flex" th:action="@{/}" method="get">
+                    <input class="form-control me-2" type="text" placeholder="Nhập từ tìm kiếm" name="kw">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
             </div>
         </nav>
 
