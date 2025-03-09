@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Home Page</title>
-</head>
-<body>
-<h1 th:text="'Hello, ' + ${name}"></h1>
-</body>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <head>
+        <title>The Anh</title>
+    </head>
+    <body>
+        <ul>
+            <li th:each="product: ${products}" th:text="${product.name}"></li>
+        </ul>
+
+        <img style="width: 300px ; height: 300px " th:src="@{/images/Test.png}" alt="Test">
+
+
+    </body>
 </html>

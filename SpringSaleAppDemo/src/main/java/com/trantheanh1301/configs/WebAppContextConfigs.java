@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer; // Quy định các quy tác 1 web mvc cần tuân thủ
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement // bật giao tác ở đây
 @ComponentScan(basePackages = {
     "com.trantheanh1301.controllers",
-        "com.trantheanh1301.configs"
+    "com.trantheanh1301.configs"
 
 })  //Chỉ định nơi tạo hạt đậu -> cứ dùng annotation liên quan mvc thì đều khai báo vào đây
 public class WebAppContextConfigs implements WebMvcConfigurer {
@@ -31,6 +32,15 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();// giúp xử lý các yêu cầu tài nguyên tĩnh (như CSS, JavaScript, hình ảnh) mà không bị Spring MVC chặn.
+    }
+
+    
+    //Những thằng bỏ vào đây có thể public -> để add static và ảnh
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+        //Cái location là đường dẫn vật lý (đuonbgừ dẫn thật còn trước đó là đường dẫn giả show ra ngoài inpect
     }
 
 }
