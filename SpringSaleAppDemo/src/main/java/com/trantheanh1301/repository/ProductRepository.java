@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ProductRepository {
+    
     public List<Product> getProducts(Map<String, String> params);
     public Product addOrUpdate(Product p);
     public Product getProductById(int id);

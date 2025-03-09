@@ -24,7 +24,8 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement // bật giao tác ở đây
 @ComponentScan(basePackages = {
     "com.trantheanh1301.controllers",
-    "com.trantheanh1301.configs"
+    "com.trantheanh1301.service",
+    "com.trantheanh1301.repository"
 
 })  //Chỉ định nơi tạo hạt đậu -> cứ dùng annotation liên quan mvc thì đều khai báo vào đây
 public class WebAppContextConfigs implements WebMvcConfigurer {
@@ -34,7 +35,6 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         configurer.enable();// giúp xử lý các yêu cầu tài nguyên tĩnh (như CSS, JavaScript, hình ảnh) mà không bị Spring MVC chặn.
     }
 
-    
     //Những thằng bỏ vào đây có thể public -> để add static và ảnh
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

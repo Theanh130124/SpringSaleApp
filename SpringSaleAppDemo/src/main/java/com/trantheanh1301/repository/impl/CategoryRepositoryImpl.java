@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CategoryRepositoryImpl implements CategoryRepository{
     @Autowired
-//    private SessionFactory factory;
     private LocalSessionFactoryBean factory;
    
     

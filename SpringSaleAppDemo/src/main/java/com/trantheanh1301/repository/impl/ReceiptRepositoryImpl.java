@@ -11,11 +11,15 @@
 //import java.util.Date;
 //import java.util.List;
 //import org.hibernate.Session;
+//import org.springframework.stereotype.Repository;
+//import org.springframework.transaction.annotation.Transactional;
 //
 ///**
 // *
 // * @author admin
 // */
+//@Repository
+//@Transactional
 //public class ReceiptRepositoryImpl {
 //    private static final UserRepositoryImpl u = new UserRepositoryImpl();
 //    private static final ProductRepositoryImpl pr = new ProductRepositoryImpl();

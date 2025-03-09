@@ -12,6 +12,6 @@ import java.util.List;
  * @author LAPTOP
  */
 public interface CategoryRepository {
-     List<Category> getCates();
+     public List<Category> getCates();
     
 }

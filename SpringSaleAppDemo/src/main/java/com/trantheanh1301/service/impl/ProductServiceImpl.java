@@ -6,17 +6,20 @@ package com.trantheanh1301.service.impl;
 
 import com.trantheanh1301.pojo.Product;
 import com.trantheanh1301.repository.ProductRepository;
+import com.trantheanh1301.service.ProductService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author LAPTOP
  */
 @Service
-public class ProductServiceImpl implements ProductRepository{
+@Transactional
+public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductRepository proRepo;
     

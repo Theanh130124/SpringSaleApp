@@ -4,6 +4,9 @@
  */
 package com.trantheanh1301.controllers;
 
+import com.trantheanh1301.repository.CategoryRepository;
+import com.trantheanh1301.service.CategoryService;
+import com.trantheanh1301.service.ProductService;
 import org.hibernate.query.Query; // Lưu ý import này
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @Autowired // phải có này để Spring quản lý
-    private LocalSessionFactoryBean factory;
+    private ProductService productService;
+    @Autowired
+    private CategoryService cateService;
 
     //Muốn gửi dữ liệu đi thì phải có model
 //    @RequestMapping("/")
@@ -35,9 +40,9 @@ public class IndexController {
     @RequestMapping("/")
     @Transactional
     public String index(Model model) {
-        Session s = factory.getObject().getCurrentSession();
-        Query q = s.createQuery("FROM Product");
-        model.addAttribute("products", q.getResultList());
+        
+        model.addAttribute("categories", this.cateService.getCates());
+        model.addAttribute("products", this.productService.getProducts(null)); // null la lay het
         return "index";
     }
 
