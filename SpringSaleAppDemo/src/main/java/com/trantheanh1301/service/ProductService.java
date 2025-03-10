@@ -9,16 +9,15 @@ import com.trantheanh1301.pojo.Product;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  *
  * @author LAPTOP
  */
 public interface ProductService {
-    
-
 
     List<Product> getProducts(Map<String, String> params);
+
+    int countProduct();
 
     Product addOrUpdate(Product p);
 

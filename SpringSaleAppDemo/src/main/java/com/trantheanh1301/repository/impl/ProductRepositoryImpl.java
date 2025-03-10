@@ -15,6 +15,8 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,15 +25,24 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author admin
  */
+//Nap page_size -> rồi lấy thông qua biến env
+
 @Repository
+@PropertySource("classpath:configs.properties")
 @Transactional
 public class ProductRepositoryImpl implements ProductRepository{
-    private static final int PAGE_SIZE = 4;
+
     
     @Autowired
     private LocalSessionFactoryBean factory;
     
-
+    //đã có autowired tạo bao nhiêu lần vẫn là Sigleton ; 
+    //Côi có thể độc env và PAGE_SIZE Thành danh sách biển tỉnh để đỡ phải ghi lại @PropertySource("classpath:configs.properties") ở nhiều nơi
+    @Autowired
+    private Environment env;
+    
+        //nạp bên properties
+    
 
     @Override
     public List<Product> getProducts(Map<String, String> params) {
@@ -43,7 +54,7 @@ public class ProductRepositoryImpl implements ProductRepository{
 
             if (params != null) {
                 List<Predicate> predicates = new ArrayList<>();
-                String kw = params.get("q");
+                String kw = params.get("kw");
                 if (kw != null && !kw.isEmpty()) {
                     Predicate p1 = b.like(root.get("name"), String.format("%%%s%%", kw));
                     predicates.add(p1);
@@ -60,10 +71,12 @@ public class ProductRepositoryImpl implements ProductRepository{
                     Predicate p3 = b.lessThanOrEqualTo(root.get("price"), Double.valueOf(toPrice));
                     predicates.add(p3);
                 }
-
+//cateId -> đúng tên với params trên web nhận từ @RequestParam
                 String cateId = params.get("cateId");
                 if (cateId != null && !cateId.isEmpty()) {
-                    Predicate p4 = b.equal(root.get("category"), Integer.valueOf(cateId));
+                    
+                    //nữa sửa trong pojo thành category thay vì categoryId cũng đc
+                    Predicate p4 = b.equal(root.get("categoryId").as(Integer.class), Integer.valueOf(cateId)); // khóa ngoại là đối tượng thì cần chỉ class Integer
                     predicates.add(p4);
                 }
 
@@ -73,13 +86,15 @@ public class ProductRepositoryImpl implements ProductRepository{
             Query query = s.createQuery(q);
 
             if (params != null) {
+                
                 String page = params.get("page");
                 if (page != null && !page.isEmpty()) {
+                    int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
                     int p = Integer.parseInt(page);
-                    int start = (p - 1) * PAGE_SIZE;
+                    int start = (p - 1) * pageSize;
                     
                     query.setFirstResult(start);
-                    query.setMaxResults(PAGE_SIZE);
+                    query.setMaxResults(pageSize);
                 }
             }
             
@@ -104,5 +119,16 @@ public class ProductRepositoryImpl implements ProductRepository{
         Session s = factory.getObject().getCurrentSession();
             return s.get(Product.class, id);
         
+    }
+
+    @Override
+    public int countProduct() {
+        Session s = factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Long> q = b.createQuery(Long.class); // nó yêu cầu trả Long count á
+        Root pro = q.from(Product.class);
+        q.select(b.count(pro)); //count nó yêu cầu trả long
+        Query query = s.createQuery(q);//tạo truy vấn
+         return ((Long) query.getSingleResult()).intValue(); // trả về số sản phẩm
     }
 }

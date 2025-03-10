@@ -7,27 +7,35 @@ package com.trantheanh1301.controllers;
 import com.trantheanh1301.repository.CategoryRepository;
 import com.trantheanh1301.service.CategoryService;
 import com.trantheanh1301.service.ProductService;
+import java.util.Map;
 import org.hibernate.query.Query; // Lưu ý import này
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author LAPTOP
  */
 @Controller
+@PropertySource("classpath:configs.properties")
+
 public class IndexController {
 
     @Autowired // phải có này để Spring quản lý
     private ProductService productService;
     @Autowired
     private CategoryService cateService;
+    @Autowired
+    private Environment env;
 
     //Muốn gửi dữ liệu đi thì phải có model
 //    @RequestMapping("/")
@@ -39,10 +47,19 @@ public class IndexController {
 //    }
     @RequestMapping("/")
     @Transactional
-    public String index(Model model) {
-        
+    //truyền params vào -> nhưng cateId trên đường dẫn phải đúng tên với trong getProducts
+    public String index(Model model ,  @RequestParam Map<String,String> params) {
+
         model.addAttribute("categories", this.cateService.getCates());
-        model.addAttribute("products", this.productService.getProducts(null)); // null la lay het
+        model.addAttribute("products", this.productService.getProducts(params)); // null la lay het -> truyền params để hứng cateId trên web
+        
+        int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
+        int count = this.productService.countProduct();
+        //nhận 1.0 để ra double để làm tròn lên
+        model.addAttribute("counter",Math.ceil(count*1.0/pageSize)); // Tổng trang
+        
+        int currentPage = params.containsKey("page") ? Integer.parseInt(params.get("page")) : 1; 
+        model.addAttribute("currentPage", currentPage); // để có hiện trang trước hay không ( ở trang 1 thì không hiện trang trước)
         return "index";
     }
 

@@ -11,6 +11,9 @@ import java.util.Map;
 public interface ProductRepository {
     
     public List<Product> getProducts(Map<String, String> params);
+    //Phân trang
+    int countProduct();
+    
     public Product addOrUpdate(Product p);
     public Product getProductById(int id);
 }

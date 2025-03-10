@@ -38,5 +38,10 @@ public class ProductServiceImpl implements ProductService{
     public Product getProductById(int id) {
        return  this.proRepo.getProductById(id);
     }
+
+    @Override
+    public int countProduct() {
+       return this.proRepo.countProduct();
+    }
     
 }
