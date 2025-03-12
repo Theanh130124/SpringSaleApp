@@ -55,8 +55,8 @@ public class IndexController {
         
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE"));
         int count = this.productService.countProduct();
-        //nhận 1.0 để ra double để làm tròn lên
-        model.addAttribute("counter",Math.ceil(count*1.0/pageSize)); // Tổng trang
+        //nhận 1.0 để ra double để làm tròn lên số trang 
+        model.addAttribute("counter",Math.ceil(count*1.0/pageSize)); // Tổng trang hiện có 
         
         int currentPage = params.containsKey("page") ? Integer.parseInt(params.get("page")) : 1; 
         model.addAttribute("currentPage", currentPage); // để có hiện trang trước hay không ( ở trang 1 thì không hiện trang trước)
