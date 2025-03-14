@@ -1,1 +1,30 @@
+<!--
 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" th:fragment="header">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" th:text="'Logo'"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" th:text="'Trang chủ'" href="/"></a>
+                        </li>
+                        <li th:each="cate: ${categories}" class="nav-item">
+                            <a class="nav-link" th:text="${cate.name}" th:href="@{/(cateId=${cate.id})}"></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <form class="d-flex" th:action="@{/}" method="get">
+                    <input class="form-control me-2" type="text" placeholder="Nhập từ tìm kiếm" name="kw">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </body>
+</html>-->
