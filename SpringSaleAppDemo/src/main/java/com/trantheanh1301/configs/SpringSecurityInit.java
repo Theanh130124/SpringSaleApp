@@ -4,10 +4,13 @@
  */
 package com.trantheanh1301.configs;
 
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
 /**
  *
  * @author LAPTOP
  */
-public class SpingSercurityConfig {
+//Tự động đăng ký Spring Security Filter Chain 
+public class SpringSecurityInit extends AbstractSecurityWebApplicationInitializer {
     
 }

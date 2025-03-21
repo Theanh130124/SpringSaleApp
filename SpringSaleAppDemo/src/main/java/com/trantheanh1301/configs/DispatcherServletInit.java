@@ -17,7 +17,9 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     //Tang database , security , hibernate
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
-            HibernateConfig.class // Khai báo hibernate ở đây
+            HibernateConfig.class, // Khai báo hibernate ở đây
+            ThymeleafConfig.class,
+            SpringSecurityConfig.class,
         };
     }
 
@@ -26,9 +28,7 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-            WebAppContextConfigs.class,
-            ThymeleafConfig.class
-        };
+            WebAppContextConfigs.class,};
     }
 
     //Kí hiệu đường dẫn trên web -> thường thì dùng dấu / 
