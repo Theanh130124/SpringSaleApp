@@ -4,9 +4,11 @@
  */
 package com.trantheanh1301.configs;
 
+import com.trantheanh1301.formatters.CategoryFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -41,6 +43,11 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
         //Cái location là đường dẫn vật lý (đuonbgừ dẫn thật còn trước đó là đường dẫn giả show ra ngoài inpect
+    }
+    //Xu ly formatter
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new CategoryFormatter());
     }
 
 }

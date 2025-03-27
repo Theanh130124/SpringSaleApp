@@ -4,6 +4,7 @@
  */
 package com.trantheanh1301.configs;
 
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -36,5 +37,6 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
 
 }

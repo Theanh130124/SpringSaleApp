@@ -80,10 +80,6 @@ public class IndexController {
 //    public String loginView(Model model){
 //        return "login" ; 
 //    }
-    @GetMapping("/products") //Chỉ thằng là get khác với request đa dạng PUT PATCH... 
-    public String list(Model model){
-        model.addAttribute("product" , new Product());
-        return "products";
-    }
+
 
 }
