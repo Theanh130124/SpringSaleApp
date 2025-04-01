@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -50,8 +52,12 @@ public class SpringSecurityConfig {  // phiên bảng này không cần kế th�
         //Cho role user vào admin có quyền dùng các api còn lại
         //chỉ định trang nào là login để thằng spring security làm chứng thực , khi thành công về / là trang chủ thất bại ở /login và có erorr
         // Nhớ là mình đang chặn security -> nghỉ sao không phải cứ tạo mới một templates là vào đây khai báo thêm  ? 
-        http.csrf(c -> c.disable()).authorizeHttpRequests(requests -> requests.requestMatchers("/", "/home","/products").permitAll().requestMatchers(HttpMethod.GET ,"/api/products" ).hasRole("ADMIN").requestMatchers("/api/**").hasAnyRole("USER","ADMIN")).formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error"));
-        
+//        http.csrf(c -> c.disable()).authorizeHttpRequests(requests -> requests.requestMatchers("/", "/home","/products").permitAll().requestMatchers(HttpMethod.GET ,"/api/products" ).hasRole("ADMIN").requestMatchers("/api/**").hasAnyRole("USER","ADMIN")).formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error"));
+            http
+        .csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất cả request
+        .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error"))
+        .logout(LogoutConfigurer::permitAll);
         return http.build();
         
     }

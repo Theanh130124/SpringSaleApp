@@ -4,6 +4,8 @@
  */
 package com.trantheanh1301.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.trantheanh1301.formatters.CategoryFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,10 +46,31 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
         //Cái location là đường dẫn vật lý (đuonbgừ dẫn thật còn trước đó là đường dẫn giả show ra ngoài inpect
     }
-    //Xu ly formatter
+
+    //Xu ly formatter khi gửi id -> thì nó tự đống gói thành đối tượng
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter());
     }
+
+    //Tạo hạt đậu cho cloudinary -> mình lấy cloud của git
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "dxiawzgnz",
+                        "api_key", "916324835836949",
+                        "api_secret", "it9HP_2TUJjIHLSshkbm0BYA5qE",
+                        "secure", true));
+        return cloudinary;
+    }
+
+//    @Bean
+//    public CommonsMultipartResolver multipartResolver() {
+//        CommonsMultipartResolver resolver
+//                = new CommonsMultipartResolver();
+//        resolver.setDefaultEncoding("UTF-8");
+//        return resolver;
+//    }
 
 }

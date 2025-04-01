@@ -26,9 +26,11 @@ public class ProductController {
     //Load danh sách sản phẩm lên
     @GetMapping("products")
     public String createView(Model model){
-        model.addAttribute("product", new Product());
-        return "product" ;
+        model.addAttribute("product", new Product());//tên này trùng với tên trong form
+        return "products" ;
     }
+    
+    //link với action add bên thymeleaf
     @PostMapping("/add")
     //value nhân từ form
     public String add(@ModelAttribute(value="product") Product p){
@@ -36,6 +38,7 @@ public class ProductController {
         return "redirect:/";
         //Sau khi thêm sản phẩm thành công, trang web sẽ chuyển hướng (redirect) về trang chủ /
     }
+    //Cập nhật sản phẩm
     @GetMapping("products/{productId}")
     public String updateView(Model model , @PathVariable(value= "productId") int id)
     {

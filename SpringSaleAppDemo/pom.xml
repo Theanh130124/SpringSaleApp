@@ -97,7 +97,31 @@
             <artifactId>spring-security-config</artifactId>
             <version>6.4.3</version>
         </dependency>
+        
+        <!--làm việc với upload file-->
+        
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
 
+        <!--Clouddinary-->
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.29.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-taglib</artifactId>
+            <version>1.29.0</version>
+        </dependency>
 
     </dependencies>
     

@@ -13,8 +13,9 @@
 
     <!--Content - Product-->
     <section class="container">
-        <div class="container mt-3">
+        
             <h1 class="text-center text-info mt-1">QUẢN TRỊ SẢN PHẨM</h1>
+            <!--th:object sẽ liên kết với từng trường trong product của controller lên from th:field là từng trường-->
                     <form th:action="@{/add}" th:object="${product}" method="post" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 
@@ -30,15 +31,18 @@
                 </select>
             </div>
             <div class="mb-3 mt-3">
+                <!--Nhớ phải sửa trường string image của product bên pojo thành muiltipartfile-->
+                <!--trong productservice có validate lại hình--> 
                 <input type="file" class="form-control" th:field="*{file}" placeholder="Chọn ảnh sản phẩm"/>
             </div>
-            
+            <!--cái này sẽ gửi id của product lên server để cập nhật dc--> 
             <input type="hidden" th:field="*{id}" />
+           
             <button type="submit" class="btn btn-primary" th:if="${product.id == null}">Thêm sản phẩm</button>
             <button type="submit" class="btn btn-primary" th:unless="${product.id == null}">Cập nhật sản phẩm</button>
         </form>
-
-        </div>
+ <!--nếu bấm thêm là thêm cập nhật chỉ hiện nút cập nhật-->
+        
     </section>
 
 

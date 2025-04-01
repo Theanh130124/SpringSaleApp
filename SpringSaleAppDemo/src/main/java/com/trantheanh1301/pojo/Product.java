@@ -19,11 +19,13 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -43,7 +45,7 @@ import java.util.Set;
     @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")})
 public class Product implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -80,6 +82,12 @@ public class Product implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Set<OrderDetail> orderDetailSet;
 
+    
+    //đây là trường thay thế cho image
+    @Transient //gán để báo cho database là trường này sẽ không liên kết gì với database cả
+    private MultipartFile file ;
+    
+    
     public Product() {
     }
 
@@ -191,7 +199,7 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -202,7 +210,7 @@ public class Product implements Serializable {
             return false;
         }
         Product other = (Product) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -210,7 +218,35 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.trantheanh1301.pojo.Product[ id=" + id + " ]";
+        return "com.trantheanh1301.pojo.Product[ id=" + getId() + " ]";
+    }
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 
 }
