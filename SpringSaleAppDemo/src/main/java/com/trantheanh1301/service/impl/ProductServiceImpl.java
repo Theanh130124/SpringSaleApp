@@ -4,6 +4,7 @@
  */
 package com.trantheanh1301.service.impl;
 
+
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.trantheanh1301.pojo.Product;
@@ -41,11 +42,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product addOrUpdate(Product p) {
 //Xử lý upload hình
-        if (p.getFile().isEmpty()) {
+        if (!p.getFile().isEmpty()) {
             try {
                Map res = cloudinary.uploader().upload(p.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
-               p.setImage(res.get("secure_url").toString());
+               p.setImage(res.get("secure_url").toString());//xem neu khong chon hinh gi thi se co hinh mac dinh 
             } catch (IOException ex) {
                 Logger.getLogger(ProductServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }

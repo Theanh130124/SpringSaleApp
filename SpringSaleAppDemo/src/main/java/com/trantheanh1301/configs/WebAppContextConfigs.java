@@ -7,11 +7,14 @@ package com.trantheanh1301.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.trantheanh1301.formatters.CategoryFormatter;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletRegistration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -53,24 +56,15 @@ public class WebAppContextConfigs implements WebMvcConfigurer {
         registry.addFormatter(new CategoryFormatter());
     }
 
-    //Tạo hạt đậu cho cloudinary -> mình lấy cloud của git
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "dxiawzgnz",
-                        "api_key", "916324835836949",
-                        "api_secret", "it9HP_2TUJjIHLSshkbm0BYA5qE",
-                        "secure", true));
-        return cloudinary;
-    }
 
-//    @Bean
-//    public CommonsMultipartResolver multipartResolver() {
-//        CommonsMultipartResolver resolver
-//                = new CommonsMultipartResolver();
-//        resolver.setDefaultEncoding("UTF-8");
-//        return resolver;
-//    }
+    
+    
+
+
+// bean danh cho upload
+    @Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
 
 }

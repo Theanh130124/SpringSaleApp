@@ -35,6 +35,7 @@
                 <!--trong productservice có validate lại hình--> 
                 <input type="file" class="form-control" th:field="*{file}" placeholder="Chọn ảnh sản phẩm"/>
             </div>
+<!--            <img th:src="${product.image}" th:if="${product.id !=null && product.image!=null}" width=300/>-->
             <!--cái này sẽ gửi id của product lên server để cập nhật dc--> 
             <input type="hidden" th:field="*{id}" />
            

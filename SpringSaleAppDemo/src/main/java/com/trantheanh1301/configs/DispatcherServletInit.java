@@ -5,6 +5,8 @@
 package com.trantheanh1301.configs;
 
 
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -20,7 +22,7 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
         return new Class[]{
             HibernateConfig.class, // Khai báo hibernate ở đây
             ThymeleafConfig.class,
-            SpringSecurityConfig.class,
+           SpringSecurityConfig.class,
         };
     }
 
@@ -36,6 +38,19 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+    
+    
+    // upload cloudinary
+    
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        String location = "/tmp";
+        long maxFileSize = 5242880; // 5MB
+        long maxRequestSize = 20971520; // 20MB
+        int fileSizeThreshold = 0;
+
+        registration.setMultipartConfig(new MultipartConfigElement(location, maxFileSize, maxRequestSize, fileSizeThreshold));
     }
 
 
