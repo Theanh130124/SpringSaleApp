@@ -1,4 +1,55 @@
-<!DOCTYPE html>
+
+
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Quản lý sản phẩm</title>
+        <th:block th:replace="base :: styles"></th:block>
+    </head>
+    <body>
+        <div th:replace="base :: header"></div>
+        
+        <section class="container">
+            <h1 class="text-center text-info mt-1">QUẢN LÝ SẢN PHẨM</h1>
+            
+            <form method="post" th:action="@{/add}" th:object="${product}" enctype="multipart/form-data">
+                <div class="form-floating mb-3 mt-3">
+                    <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Tên sản phẩm">
+                    <label for="name">Tên sản phẩm</label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                    <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Gía sản phẩm">
+                    <label for="price">Gía sản phẩm</label>
+                </div>
+                <div class="form-floating">
+                <select class="form-select" id="category" th:field="*{categoryId}">
+                  <option th:each="c: ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+                <label for="category" class="form-label">Danh mục:</label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                    <input type="file" class="form-control" th:field="*{file}" id="price" placeholder="Ảnh sản phẩm">
+                    <label for="price">Ảnh sản phẩm</label>
+                    
+                    <img th:src="${product.image}" th:if="${product.id != null && product.image != null}" width="200" />
+                </div>
+                <div class="form-floating mt-1">
+                    <input type="hidden" th:field="*{id}" />
+                    <input type="hidden" th:field="*{image}" />
+                    
+                    <button class="btn btn-success" th:if="${product.id == null}">Thêm sản phẩm</button>
+                    <button class="btn btn-success" th:unless="${product.id == null}">Cập nhật sản phẩm</button>
+                </div>
+            </form>
+        </section>
+        
+        <div th:replace="base :: footer"></div>
+    </body>
+</html>
+
+
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
     <head>
@@ -11,12 +62,12 @@
     <div th:replace="base :: header"></div>
 
 
-    <!--Content - Product-->
+    Content - Product
     <section class="container">
         
             <h1 class="text-center text-info mt-1">QUẢN TRỊ SẢN PHẨM</h1>
-            <!--th:object sẽ liên kết với từng trường trong product của controller lên from th:field là từng trường-->
-                    <form th:action="@{/add}" th:object="${product}" method="post" enctype="multipart/form-data">
+            th:object sẽ liên kết với từng trường trong product của controller lên from th:field là từng trường
+                    <form method="post" th:action="@{/add}" th:object="${product}" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 
                 <input type="text" class="form-control" th:field="*{name}" placeholder="Tên sản phẩm" />
@@ -30,23 +81,28 @@
                     <option th:each="c:${categories}" th:value="${c.id}" th:text="${c.name}">1</option>
                 </select>
             </div>
-            <div class="mb-3 mt-3">
-                <!--Nhớ phải sửa trường string image của product bên pojo thành muiltipartfile-->
-                <!--trong productservice có validate lại hình--> 
-                <input type="file" class="form-control" th:field="*{file}" placeholder="Chọn ảnh sản phẩm"/>
-            </div>
-<!--            <img th:src="${product.image}" th:if="${product.id !=null && product.image!=null}" width=300/>-->
-            <!--cái này sẽ gửi id của product lên server để cập nhật dc--> 
+           
+                Nhớ phải sửa trường string image của product bên pojo thành muiltipartfile
+                trong productservice có validate lại hình 
+                  <div class="form-floating mb-3 mt-3">
+                    <input type="file" class="form-control" th:field="*{file}" id="image" placeholder="Ảnh sản phẩm">
+                    <label for="image">Ảnh sản phẩm</label>
+                    
+                    <img th:src="${product.image}" th:if="${product.id != null && product.image != null}" width="200" />
+                </div>
+                
+
+            cái này sẽ gửi id của product lên server để cập nhật dc 
             <input type="hidden" th:field="*{id}" />
            
             <button type="submit" class="btn btn-primary" th:if="${product.id == null}">Thêm sản phẩm</button>
             <button type="submit" class="btn btn-primary" th:unless="${product.id == null}">Cập nhật sản phẩm</button>
         </form>
- <!--nếu bấm thêm là thêm cập nhật chỉ hiện nút cập nhật-->
+ nếu bấm thêm là thêm cập nhật chỉ hiện nút cập nhật
         
     </section>
 
 
             <div th:replace="base :: footer"></div>
             </body>
-            </html>
+            </html>-->

@@ -77,11 +77,7 @@ public class IndexController {
         return "index";
     }
     
-    // login này đã giao cho Spring Security làm nên mình chỉ cung  cấp view
-//    @RequestMapping("/login")
-//    public String loginView(Model model){
-//        return "login" ; 
-//    }
+
 
 
 }

@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService{
             throw new UsernameNotFoundException("Khong tim thay username");
         }
         Set<GrantedAuthority> authories = new HashSet<>() ;
-        authories.add(new SimpleGrantedAuthority(u.getUserRole()));
+        authories.add(new SimpleGrantedAuthority(u.getUserRole())); // có thể kiểm tra nhiều trường
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword() , authories);
     }
     

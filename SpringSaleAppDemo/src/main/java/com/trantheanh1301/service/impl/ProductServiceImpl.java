@@ -42,15 +42,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product addOrUpdate(Product p) {
 //Xử lý upload hình
-        if (!p.getFile().isEmpty()) {
+                if (!p.getFile().isEmpty()) {
             try {
-               Map res = cloudinary.uploader().upload(p.getFile().getBytes(),
+                Map res = cloudinary.uploader().upload(p.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
-               p.setImage(res.get("secure_url").toString());//xem neu khong chon hinh gi thi se co hinh mac dinh 
+                p.setImage(res.get("secure_url").toString());
             } catch (IOException ex) {
                 Logger.getLogger(ProductServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+       
         return this.proRepo.addOrUpdate(p);
     }
 
@@ -62,6 +63,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int countProduct() {
         return this.proRepo.countProduct();
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        this.proRepo.deleteProduct(id);
     }
 
 }

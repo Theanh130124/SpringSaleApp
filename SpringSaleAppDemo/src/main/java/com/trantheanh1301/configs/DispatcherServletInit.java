@@ -45,7 +45,7 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        String location = "/tmp";
+        String location = "/"; //lưu ở đây trên cloud  /user thì phải tạo folder user trên đó
         long maxFileSize = 5242880; // 5MB
         long maxRequestSize = 20971520; // 20MB
         int fileSizeThreshold = 0;

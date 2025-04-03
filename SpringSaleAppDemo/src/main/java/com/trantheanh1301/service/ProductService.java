@@ -22,4 +22,5 @@ public interface ProductService {
     Product addOrUpdate(Product p);
 
     Product getProductById(int id);
+    void deleteProduct(int id);
 }

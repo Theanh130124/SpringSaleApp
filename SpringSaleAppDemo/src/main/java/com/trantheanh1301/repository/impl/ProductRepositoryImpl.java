@@ -103,9 +103,9 @@ public class ProductRepositoryImpl implements ProductRepository{
 
     @Override
     public Product addOrUpdate(Product p) {
-              Session s = factory.getObject().getCurrentSession();
+              Session s = this.factory.getObject().getCurrentSession();
              if (p.getId() == null)
-                 s.persist(s);
+                 s.persist(p);
              else
                  s.merge(p);
          
@@ -130,5 +130,12 @@ public class ProductRepositoryImpl implements ProductRepository{
         q.select(b.count(pro)); //count nó yêu cầu trả long
         Query query = s.createQuery(q);//tạo truy vấn
          return ((Long) query.getSingleResult()).intValue(); // trả về số sản phẩm
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+       Session s = factory.getObject().getCurrentSession();
+        Product p = this.getProductById(id);
+        s.remove(p);
     }
 }

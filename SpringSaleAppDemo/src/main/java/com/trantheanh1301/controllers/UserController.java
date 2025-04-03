@@ -4,10 +4,21 @@
  */
 package com.trantheanh1301.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 /**
  *
  * @author LAPTOP
  */
+@Controller
 public class UserController {
+    
+    
+    // thằng Spring security làm sẳn đăng nhập va đăng xuất cho mình rồi
+    @GetMapping("/login")
+    public String loginView(){
+        return "login";
+    }
     
 }

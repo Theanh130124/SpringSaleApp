@@ -84,9 +84,11 @@ public class Product implements Serializable {
 
     
     //đây là trường thay thế cho image
-    @Transient //gán để báo cho database là trường này sẽ không liên kết gì với database cả
-    private MultipartFile file ;
+//gán để báo cho database là trường này sẽ không liên kết gì với database cả
+
     
+    @Transient
+    private MultipartFile file;
     
     public Product() {
     }

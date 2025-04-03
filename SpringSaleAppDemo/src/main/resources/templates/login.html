@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>The Anh</title>       
+    <th:block th:replace="base :: styles"></th:block>
+
+</head>
+<body>
+
+    <div th:replace="base :: header"></div>
+
+
+    <!--Content - Product-->
+    <section class="container">
+
+        <h1 class="text-center text-info mt-1">ĐĂNG NHẬP</h1>
+
+        <form method="post" th:action="@{/login}" >
+
+            <!--name phải giống với tên trường pojo  vì phiên bản mới không có Backend Binding (tự gán dữ liệu pojo) -->
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" name="username" id="name" placeholder="Tên sản phẩm">
+                <label for="name">Tên đăng nhập</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Tên sản phẩm">
+                <label for="password">Mật khẩu</label>
+            </div>
+
+
+
+            <div class="form-floating mt-1">
+
+                <button class="btn btn-success" >Đăng nhập</button>
+            </div>
+
+        </form>
+
+
+    </section>
+
+
+    <div th:replace="base :: footer"></div>
+</body>
+</html>
