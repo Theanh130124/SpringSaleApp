@@ -84,6 +84,7 @@ public class SpringSecurityConfig {  // phiên bảng này không cần kế th�
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/products/**").permitAll() //để vào được trang add
+                        .requestMatchers("/api/users").permitAll()
                         .requestMatchers("/add").permitAll()
                         .requestMatchers("/api/**").authenticated())
                 .formLogin(form -> form.loginPage("/login")

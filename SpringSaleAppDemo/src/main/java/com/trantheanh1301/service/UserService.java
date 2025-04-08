@@ -5,7 +5,9 @@
 package com.trantheanh1301.service;
 
 import com.trantheanh1301.pojo.User;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -13,4 +15,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     User getUserByUsername(String username);
+    User register(Map<String,String> params , MultipartFile avatar);
 }

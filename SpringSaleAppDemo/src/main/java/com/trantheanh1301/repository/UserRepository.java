@@ -12,4 +12,5 @@ import com.trantheanh1301.pojo.User;
  */
 public interface UserRepository {
     public User getUserByUsername(String username);
+    User register(User u);
 }
