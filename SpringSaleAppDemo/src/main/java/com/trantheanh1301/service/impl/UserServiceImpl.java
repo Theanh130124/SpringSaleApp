@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService{
                         ObjectUtils.asMap("resource_type", "auto"));
                 u.setAvatar(res.get("secure_url").toString());
             } catch (IOException ex) {
-                Logger.getLogger(ProductServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
